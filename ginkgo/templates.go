@@ -126,7 +126,10 @@ func getPackageImportPath() string {
 		panic(err.Error())
 	}
 	paths := strings.Split(workingDir, "/src/")
-	return paths[len(paths) - 1]
+	if len(paths) < 2 {
+		panic("Couldn't identify package import path")
+	}
+	return paths[len(paths)-1]
 }
 
 func fileExists(path string) bool {
